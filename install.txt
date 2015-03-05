@@ -1,7 +1,18 @@
-1、解压到您的web目录下面
+1、下载项目文件，放在web服务器的目录下面
+git clone https://github.com/zy73122/jdphp.git
+mv jdphp /data/wwwroot/jdphp
 
-手工创建下面两个文件夹
-mkdir 777 app/data/logs
-mkdir 777 app/data/template_compiled
+2、你可能需要手工创建下面两个文件夹
+mkdir 700 app/data/logs
+mkdir 700 app/data/template_compiled
 
-2、使用浏览器浏览，比如 http://localhost/appdemo/
+3、导入MySQL数据库
+
+创建数据库
+> create database jdphp109  charset=utf8
+
+导入数据
+mysql -uxx -pxx jdphp109 < jdphp108.sql
+
+4、使用浏览器浏览，打开
+http://localhost/appdemo/
