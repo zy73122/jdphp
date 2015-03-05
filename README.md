@@ -1,10 +1,10 @@
-# jdphp框架 v1.0.9
+# jdphp框架 v1.0.9 core
 
 
-简介：
+简介：  
 基于MVC架构，精简的内核，辅助以模块化的工具组件，让你的开发更简单、灵活。
 
-目录结构：
+目录结构：  
     ├─appdemo              应用名称  
     │  ├─config            应用的配置目录  
     │  ├─controller        控制器  
@@ -36,4 +36,4 @@
 
                 
 Author：zhangyu  
-E-mail：396772873@qq.com
+E-mail：396772873@qq.com  
