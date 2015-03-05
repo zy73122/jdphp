@@ -1,0 +1,7 @@
+1、解压到您的web目录下面
+
+手工创建下面两个文件夹
+mkdir 777 app/data/logs
+mkdir 777 app/data/template_compiled
+
+2、使用浏览器浏览，比如 http://localhost/appdemo/

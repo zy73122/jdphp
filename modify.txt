@@ -1,0 +1,74 @@
+﻿require_once(PATH_ROOT . "include/editor.php") ;
+
+getSingleton 迁移到tool/core.php
+
+http://localhost/jdphp1.08/update_server/1.08/update-list.txt
+D:\phpwww\lj\jdphp1.6\update_server\1.05_utf8
+
+application
+
+//如果存在公共文件夹，则设为默认模板目录
+common
+
+前台后台模板设置
+
+用户菜单配置
+
+
+============================================================================
+= sql update
+============================================================================
+ALTER TABLE jd_config ADD COLUMN cf_desc VARCHAR(30) NOT NULL DEFAULT '' COMMENT '说明';
+
+//支持这样调用： s('encrypt.en_aes') 
+============================================================================
+= todo:
+============================================================================
+?update
+plan
+IN_BACKGROUND   //后台和前台区别
+$this_tpl_dir = PATH_MODULE . $relativepath;
+
+
+下面的统一为c_sample,m_sample
+$result = $this->getOptionssampleCycle(0, $selectedId);
+					$img_thumb = $this->model->createThumb($one['id']);
+	public function createThumb(...)
+	
+	
+db_gate\ base_model  get_list统一
+
+============================================================================
+= v1.0.9
+============================================================================
+下面的类改为继承自base_model
+external/model/m_ex_cms.php
+external/model/m_ex_createmodel.php
+这种方式调用不再支持：
+m_ex_cms::fun_name(...)
+
+支持多应用目录模式 （appdemo），根目录的control,model,template移到应用目录下，及相关的修改
+常量修改：
+. ADMIN .
+define('PATH_CONTROLLER_FRONT', PATH_ROOT . 'controller/');
+define('PATH_CONTROLLER_BACK', 	PATH_ROOT . ADMIN . '/controller/');
+define('PATH_MODEL_FRONT', 		PATH_ROOT . 'model/');
+define('PATH_MODEL_BACK', 		PATH_ROOT . ADMIN . '/model/');
+define('PATH_DATA_FRONT', 		PATH_ROOT . 'data/');
+define('PATH_DATA_BACK', 		PATH_ROOT . ADMIN . '/data/');
+
+define('PATH_TPLS_CUR_ROOT', 		PATH_ROOT .	'template/');
+define('PATH_TPLS_BACK_ROOT', 		PATH_ROOT . ADMIN . '/template/');
+
+怎么改？
+PATH_TPLS_CURAPP_ROOT
+PATH_TPLS_CURAPP
+
+#增加ajax方式提交
+admin1314\static\js\common.js
+testvote_log相关的4个文件用来测试
+
+//增加 action_onpost 支持
+//如果是ajax提交时，返回json格式    ?ajax=1
+http://www.jdphp.com/appdemo_small/?c=testvote_log&a=testvote_log_edit&id=87
+

@@ -1,0 +1,473 @@
+<!--{template 'header'}-->
+<div id="page">
+	<!--{template 'top'}-->
+	<div class="clear"></div>
+	<div class="dtMainBody">
+		<div class="pageTitle wrapper">
+	        <div class="pageFunction">职员信息 ($staff['username'])</div>
+	    </div>
+	    <div class="clear"></div>
+    	<div class="dtSmallBody">
+			<div id="container" class="container">
+				<div>
+					<ul class="tab1 wrapper">
+						<li class="current"><a href="#tabs-1"><span>职员信息</span></a></li>
+						<li><a href="{BASE_URL}ag/employee_pspt/$staff['uid']"><span>通行证</span></a></li>
+						<li><a href="{BASE_URL}ag/employee_orgpower/$staff['uid']"><span>组织权限</span></a></li>
+					</ul>
+				</div>
+				<div class="tabline"></div>
+				<form id="editStaff" action="{BASE_URL}staffajax/staff_modify" method="post" name="editStaff" onsubmit="return _unitstaff.staffModify();">
+				<div id="tabs-1" class="bigForm fillForm divContentTable">
+					<input type="hidden" name="unitid" value="$unit['id']" />
+					<input type="hidden" name="uid" value="{$staff['uid']}" />
+					<table>
+						<tr class="trTitleLine">
+		       				<td colspan="3">基本信息</td>
+		       			</tr>
+						<tr class="infoItem">
+					        <td><span class="validateInfo">* </span>姓名：</td>
+					        <td><input type="text" id="username" name="username" value="$staff['username']" /></td>
+				            <td></td>
+				        </tr>
+				        <tr class="infoItem">
+				        	<td>工号：</td>
+				        	<td><input type="text" id="workid" name="workid" value="$staff['workid']" /></td>
+				            <td></td>
+				        </tr>
+				        <tr class="infoItem">
+					        <td>性别：</td>
+					        <td>
+					        	<select name="gender">
+									<option value="1" {if $staff_ext['gender']==1} selected {/if} >男</option>
+									<option value="2" {if $staff_ext['gender']==2} selected {/if} >女</option>
+									<option value="0" {if $staff_ext['gender']==0} selected {/if} >保密</option>
+								</select>
+					        </td>
+				            <td></td>
+				        </tr>
+				        <!--{if count($depts)>0}-->
+				        <!--{loop $depts $key $dept}-->
+				        <tr class="infoItem add1">
+					        <td>部门：</td>
+					        <td>
+                            	<input type="hidden" name="dept[$key][deptid]" value="$dept['deptid']" class="notRemove" />
+					        	<input type="text"  disabled="disabled" name="dept[$key][deptname]" value="$dept['deptname']" />
+                                <a title="部门选择" class="imgBtn thickbox" style="vertical-align:middle; margin-bottom:6px; margin-bottom:4px\9; *+margin-bottom: 10px; " href="{BASE_URL}ag/department_window?keepThis=$key&TB_iframe=true&height=0&width=0">
+		        					<span>选择</span>
+		        				</a>
+		        				<!--{if $key==0}-->
+								<a class="addtr" href="###" onclick="cloneRow(this);">添加</a>
+								<!--{else}-->
+								<a class="deleterow" href="###" onclick="removeRow(this);">删除</a>
+								<!--{/if}-->
+					        </td>
+					        <td></td>
+				        </tr>
+				        <!--{/loop}-->
+				        <!--{else}-->
+				        <tr class="infoItem add1">
+					        <td>部门：</td>
+					        <td>
+                            	<input type="hidden" name="dept[0][deptid]" class="notRemove" />
+					        	<input type="text"  disabled="disabled" name="dept[0][deptname]" />
+	                                <a title="部门选择" class="imgBtn thickbox" style="vertical-align:middle; margin-bottom:6px; margin-bottom:4px\9; *+margin-bottom: 10px; " href="{BASE_URL}ag/department_window?keepThis=0&TB_iframe=true&height=0&width=0">
+			        					<span>选择</span>
+			        				</a>
+								<a class="addtr" href="###" onclick="cloneRow(this);">添加</a>
+					        </td>
+					        <td></td>
+				        </tr>
+				        <!--{/if}-->
+						<tr class="infoItem">
+				        	<td>职务：</td>
+				        	<td><input type="text" name="duty"></td>
+				        	<td></td>
+				        </tr>
+				        <tr class="infoItem">
+				        	<td>入司时间：</td>
+				        	<td><input type="text" name="joindate" id="joindate" value="$staff['joindate']"/></td>
+				            <td></td>
+				        </tr>
+				        <tr class="infoItem">
+	        				<td>常用邮箱：</td>
+				        	<td>
+	        					<input type="text" name="gemail" value="$staff['email']"/>
+			        		</td>
+				            <td></td>
+				        </tr>
+				        <tr class="showMore">
+				        	<td colspan="3"><a href="###" class="showMoreDown">扩展资料</a></td>
+				        </tr>
+				        <tr class="trTitleLine contactItem">
+		       				<td colspan="3">联系方式</td>
+		       			</tr>
+				        <tr class="contactItem">
+				        	<td>计费电话：</td>
+				        	<td><input type="text" name="meter_telephone" value="$staff['telephone']" /></td>
+				            <td></td>
+				        </tr>
+				        <tr class="contactItem">
+				        	<td>常用手机：</td>
+				        	<td><input type="text" name="mobilephone" value="$staff['mobilephone']" /></td>
+				            <td></td>
+				        </tr>
+				        <tr class="contactItem">
+					        <td>传真：</td>
+					        <td><input type="text" name="fax" value="$staff_ext['fax']" /></td>
+				            <td></td>
+				        </tr>
+				        <!--{if count($staff['ext_telephone'])>0}-->
+				        <!--{eval $i=0;}-->
+				        <!--{loop $staff['ext_telephone'] $k $v}-->
+				        <tr class="contactItem add2" count="<!--{eval echo ++$i;}-->">
+		        			<td>电话：</td>
+					        <td>
+					        	<input type="hidden" name="ext_telephone[$k][id]" value="$v['id']" />
+		        				<span><input type="text" name="ext_telephone[$k][telephone]" value="$v['telephone']" /></span>
+					        	<span>
+		        					<select name="ext_telephone[$k][type]" style="width: 135px;">
+					        			<option value="home" {if $v['type']=="home"} selected {/if}>住宅电话</option>
+					        			<option value="work" {if $v['type']=="work"} selected {/if}>单位电话</option>
+					        			<option value="cell" {if $v['type']=="cell"} selected {/if}>移动电话</option>
+									</select>
+					        	</span>
+					        </td>
+					        <td>
+					        	<!--{if $k==0}-->
+		        				<a class="addtr" href="###" onclick="cloneRow(this);">添加</a>
+		        				<!--{else}-->
+		        				<a class="deleterow" href="###" onclick="removeRow(this);">删除</a>
+		        				<!--{/if}-->
+					        </td>
+				        </tr>
+				        <!--{/loop}-->
+				        <!--{else}-->
+				        <tr class="contactItem add2">
+					        <td>电话：</td>
+					        <td>
+					        	<span><input type="text" name="ext_telephone[0][telephone]" /></span>
+					        	<span>
+					        		<select name="ext_telephone[0][type]" style="width: 135px;">
+					        			<option value="home">住宅电话</option>
+					        			<option value="work">单位电话</option>
+					        			<option value="cell">移动电话</option>
+					        			<option value="home,fax">家庭传真</option>
+					        			<option value="work,fax">工作传真</option>
+					        			<option value="pager">寻乎机</option>
+					        			<option value="other">其他电话</option>
+									</select>
+					        	</span>
+					        </td>
+					        <td>
+					        	<a class="addtr" href="###" onclick="cloneRow(this);">添加</a>
+					        </td>
+				        </tr>
+				        <!--{/if}-->
+				        <!--{if count($staff['ext_email'])>0}-->
+				        <!--{eval $i=0;}-->
+				        <!--{loop $staff['ext_email'] $k $v}-->
+				        <tr class="contactItem add3" count="<!--{eval echo ++$i;}-->">
+		        			<td>附加邮件：</td>
+					        <td>
+					        	<input type="hidden" name="ext_email[$k][id]" value="$v['id']" />
+		        				<span><input type="text" name="ext_email[$k][email]" value="$v['email']" /></span>
+					        	<span>
+	        						<select name="ext_email[$k][type]" style="width: 135px;">
+									</select>
+					        	</span>
+					        </td>
+					        <td>
+					        	<!--{if $k==0}-->
+		        				<a class="addtr" href="###" onclick="cloneRow(this);">添加</a>
+		        				<!--{else}-->
+		        				<a class="deleterow" href="###" onclick="removeRow(this);">删除</a>
+		        				<!--{/if}-->
+					        </td>
+				        </tr>
+				        <!--{/loop}-->
+				        <!--{else}-->
+				        <tr class="contactItem add3">
+					        <td>附加邮件：</td>
+					        <td>
+					        	<span><input type="text" name="ext_email[0][email]" /></span>
+					        	<span>
+					        		<select name="ext_email[0][type]" style="width: 135px;">
+					        			<option value="internet,home">家庭邮箱</option>
+					        			<option value="internet,work">工作邮箱</option>
+					        			<option value="internet">其他邮箱</option>
+									</select>
+					        	</span>
+					        </td>
+					        <td>
+					        	<a class="addtr" href="###" onclick="cloneRow(this);">添加</a>
+					        </td>
+				        </tr>
+				        <!--{/if}-->
+				        <!--{if count($staff['ext_ims'])>0}-->
+				        <!--{eval $i=0;}-->
+				        <!--{loop $staff['ext_ims'] $k $v}-->
+				        <tr class="contactItem add4" count="<!--{eval echo ++$i;}-->">
+					        <td>即时通讯：</td>
+					        <td>
+					        	<input type="hidden" name="communication[$k][id]" value="$v['id']" />
+		        				<span><input type="text" name="communication[$k][tool]" value="$v['im']" /></span>
+					        	<span>
+					        		<select name="communication[$k][protocol]">
+									</select>
+					        	</span>
+					        	<span>
+					        		<select name="communication[$k][type]">
+					        			<option value="home" {if $v['type']=="home"} selected {/if}>家庭</option>
+					        			<option value="work" {if $v['type']=="work"} selected {/if}>工作</option>
+					        			<option value="other" {if $v['type']=="other"} selected {/if}>其他</option>
+									</select>
+					        	</span>
+					        </td>
+					        <td>
+					        	<!--{if $k==0}-->
+		        				<a class="addtr" href="###" onclick="cloneRow(this);">添加</a>
+		        				<!--{else}-->
+		        				<a class="deleterow" href="###" onclick="removeRow(this);">删除</a>
+		        				<!--{/if}-->
+					        </td>
+				        </tr>
+				        <!--{/loop}-->
+				        <!--{else}-->
+				        <tr class="contactItem add4">
+					        <td>即时通讯：</td>
+					        <td>
+					        	<span><input type="text" name="communication[0][tool]" /></span>
+					        	<span>
+					        		<select name="communication[0][protocol]">
+					        			<option value="91u">91U</option>
+					        			<option value="qq">QQ</option>
+					        			<option value="msn">MSN</option>
+					        			<option value="gtalk">Gtalk</option>
+					        			<option value="aim">AIM</option>
+					        			<option value="yahoo">YAHOO</option>
+					        			<option value="skype">Skype</option>
+					        			<option value="icq">ICQ</option>
+					        			<option value="jabber">JABBER</option>
+									</select>
+					        	</span>
+					        	<span>
+					        		<select name="communication[0][type]">
+					        			<option value="home">家庭</option>
+					        			<option value="work">工作</option>
+					        			<option value="other">其他</option>
+									</select>
+					        	</span>
+					        </td>
+					        <td>
+					        	<a class="addtr" href="###" onclick="cloneRow(this);">添加</a>
+					        </td>
+				        </tr>
+				        <!--{/if}-->
+				        <tr class="contactItem">
+					        <td>常用地址：</td>
+					        <td>
+					        	<span><input type="text" name="g_addr" value="$staff_ext['addr']" /></span>
+					        	<span><input type="text" name="g_postcode" value="$staff_ext['postcode']" style="width: 130px; position:relative; top:-1px\9;" /></span>
+					        </td>
+					        <td></td>
+				        </tr>
+				        <!--{if count($staff['ext_address'])>0}-->
+				        <!--{eval $i=0;}-->
+				        <!--{loop $staff['ext_address'] $k $v}-->
+				        <tr class="contactItem add5" count="<!--{eval echo ++$i;}-->">
+				        
+                        	<td>附加地址：</td>
+					        <td>
+					        	<input type="hidden" name="ext_addr[$k][id]" value="$v['id']" />
+				        		<div class="cityWrap" country="$v['country']" prov="$v['province']" city="$v['city']">
+				        			<select class="country" name="ext_addr[$k][country]">
+                                    </select>
+                                    <select class="prov" name="ext_addr[$k][province]">
+                                        <option value="">请选择</option>
+                                    </select>
+                                    <select class="city" name="ext_addr[$k][city]">
+                                        <option value="">请选择</option>
+                                    </select>
+				        		</div>
+				        		<div><input type="text" name="ext_addr[$k][area]" value="$v['area']" style="width:348px;"/></div>
+					        	<span><input type="text" name="ext_addr[$k][postcode]" value="$v['postcode']" /></span>
+					        	<span>
+					        		<select name="ext_addr[$k][type]"  style="width: 135px; top:1px\9; position:relative;">
+					        			<option value="home" {if $v['type']=="home"} selected {/if}>家庭</option>
+					        			<option value="work" {if $v['type']=="work"} selected {/if}>工作</option>
+					        			<option value="other" {if $v['type']=="other"} selected {/if}>其他</option>
+									</select>
+					        	</span>
+					        </td>
+					        <td>
+					        	<!--{if $k==0}-->
+		        				<a class="addtr" href="###" onclick="cloneRow(this);">添加</a>
+		        				<!--{else}-->
+		        				<a class="deleterow" href="###" onclick="removeRow(this);">删除</a>
+		        				<!--{/if}-->
+					        </td>
+				        </tr>
+				        <!--{/loop}-->
+				        <!--{else}-->
+				        <tr class="contactItem add5">
+                        	<td>附加地址：</td>
+					        <td>
+				        		<div class="cityWrap">
+				        			<select class="country" name="ext_addr[0][country]">
+                                    </select>
+                                    <select class="prov" name="ext_addr[0][province]">
+                                        <option value="">请选择</option>
+                                    </select>
+                                    <select class="city" name="ext_addr[0][city]">
+                                        <option value="">请选择</option>
+                                    </select>
+				        		</div>
+				        		<div><input type="text" name="ext_addr[0][area]" value="街路巷" style="width:348px;"/></div>
+					        	<span><input type="text" name="ext_addr[0][postcode]" value="邮编" /></span>
+					        	<span>
+					        		<select name="ext_addr[0][type]"  style="width: 135px; top:1px\9; position:relative;">
+					        			<option value="home">家庭</option>
+					        			<option value="work">工作</option>
+					        			<option value="other">其他</option>
+									</select>
+					        	</span>
+					        </td>
+					        <td>
+					        	<a class="addtr" href="###" onclick="cloneRow(this);">添加</a>
+					        </td>
+				        </tr>
+				        <!--{/if}-->
+				        <tr class="trTitleLine selfItem">
+		       				<td colspan="3">个性资料</td>
+		       			</tr>
+				        <tr class="selfItem">
+					        <td>生日：</td>
+					        <td><input type="text" name="birthday" id="datepicker" value="$staff_ext['birthday']" /></td>
+					        <td></td>
+				        </tr>
+				        <tr class="selfItem">
+					        <td>血型：</td>
+					        <td>
+					        	<select name="blood">
+					        		<option value=""> --- </option>
+								</select>
+					        </td>
+				        </tr>
+				        <tr class="selfItem">
+					        <td>个性签名：</td>
+					        <td><input type="text" name="signature" value="$staff['signature']" /></td>
+					        <td></td>
+				        </tr>
+				        <tr class="selfItem">
+					        <td>个人主页：</td>
+					        <td><input type="text" name="site" value="$staff_ext['site']" /></td>
+					        <td></td>
+				        </tr>
+				        <tr class="selfItem">
+					        <td>个人说明：</td>
+					        <td>
+					        	<textarea name="description" rows="4" cols="42" style="height:70px; width:348px;">$staff_ext['description']</textarea>
+					        </td>
+					        <td></td>
+				        </tr>
+					</table>
+                    <br /><br /><br /><br />
+					<div class="dtActionLine" style="width:500px; height:30px; padding:5px; padding-left:100px; background:white">
+						<div class="normalBtns"><input type="button" value="保存" name="mySubmit" /></div>
+						<a class="imgBtn" style="vertical-align:bottom" href="javascript:history.go(-1);" ><span>返回</span></a>
+					</div>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="{JS_URL}cityjson.js"></script>
+<script type="text/javascript" src="{JS_URL}jquery.ui.datepicker-zh-CN.js"></script>
+<script type="text/javascript" src="{JS_URL}admin.js"></script>
+<script type="text/javascript" src="{JS_URL}script.js"></script>
+<script type="text/javascript" src="{JS_URL}jquery.cityselect.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("input[name=joindate]").datepicker({
+		changeMonth: false,
+		changeYear: true
+	});
+	
+	$('#ui-datepicker-div').click(function() {
+		setTimeout(function() {
+			$("#forcrtime").remove();
+		}, 100);
+	});
+	$("#datepicker").datepicker({
+		changeMonth: false,
+		changeYear: true
+	});
+	$(".cityWrap").each(function() {
+		var _this = $(this);
+		var _country = $('select.country', _this);
+		
+		if (_this.attr('country') == '中国') {
+			_country.next().show().next().show();
+		}
+		else {
+			_country.next().hide().next().hide();
+		}
+		
+		_country.addCountry(_this.attr('country')).bind('change', function() {			
+			if (_country.val() == '中国') {
+				_country.next().show().next().show();
+			}
+			else {
+				_country.next().find('option').attr('selected', '').eq(0).attr('selected', 'selected').end().end().hide().next()
+				.html('<option value="">请选择</option>').hide();
+			}
+		});
+		
+		_this.citySelect({
+			prov: _this.attr('prov'),
+			city: _this.attr('city')
+		});
+	});
+	
+	// 保存将要复制的数据
+	$('.add1, .add2, .add3, .add4, .add5').each(function(index) {
+		var _this = $(this);
+
+		_this.attr('save', '<tr class="infoItem">' + _this.html() + '</tr>');
+	});
+	
+	$('input[name=mySubmit]').click(function() {
+		if (_unitstaff.check()) {
+			$.ajax({
+				url: URL + 'staffajax/staff_modify',
+				data: $('#editStaff').serialize(),
+				type: 'post',
+				dataType: 'json',
+				beforeSend: function() {
+					loading();
+				},
+				success: function(data) {
+					tip('success', data[0].msg, function() {
+						location.reload();
+					});
+				},
+				error: function(XMLHttpRequest, textStatus, errorThrown) {
+					var data = eval(XMLHttpRequest.responseText);
+					
+					if(XMLHttpRequest.status==409||XMLHttpRequest.status==405) {
+						tip('fail', data[0].msg)
+					}
+				}
+			});
+		}
+	});
+	
+	$('.dtActionLine').fixed({
+		left  : '15%',
+		bottom: -10
+	});
+});
+</script>
+<!--{template 'footer_inner'}-->

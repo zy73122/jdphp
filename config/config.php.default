@@ -1,0 +1,137 @@
+<?php
+
+$config = array(
+	'appname' => '项目名称',
+	'log' => array(
+		'global' => PATH_DATA . 'logs/global.log',
+		'exception' => PATH_DATA . 'logs/exception.log',
+		'error' => PATH_DATA . 'logs/error.log',
+		'operation' => PATH_DATA . 'logs/operation.log', //操作记录
+	),	
+	'sdkurl' => array(
+		//'prefix'=>"http://www.test.com/", //内网
+		'prefix'=>"http://api.yx36.com/", //外网
+	),	
+	//'admin_dir' => 'admin', //后台目录
+	'default_tplname' => 'default', //默认模板
+	'default_controller' => 'index', //默认控制器
+	'default_action' => 'index', //默认动作
+	
+	//数据库连接信息
+	'database' => array(
+		'default' => array( //主从从..
+			array(
+				'hostname'   => 'localhost',
+				'port'   => 3306,
+				'database'   => 'jdphp108',
+				'username'   => 'root',
+				'password'   => '1',
+				'persistent' => false,
+				'charset'      => 'utf8',
+				'table_prefix' => 'jd_',
+			),
+		 ),
+		'yx' => array( //主从从..
+			array(
+				'hostname'   => 'localhost',
+				'port'   => 3306,
+				'database'   => 'yx',
+				'username'   => 'root',
+				'password'   => '1',
+				'persistent' => false,
+				'charset'      => 'utf8',
+				'table_prefix' => '',
+			),
+		 ),
+	),
+	
+	//控制器相关设置
+	'basepath'	=> array(
+		'controller' 		=> PATH_APP . 'application/controller/',
+		'model' 			=> PATH_APP . 'application/model/',
+		'template' 			=> PATH_APP . 'template/',
+		'template_compiled' => PATH_DATA . 'template_compiled/',
+		'template_cache' 	=> PATH_DATA . 'template_cache/',
+		'template_config' 	=> PATH_DATA . 'template_config/',
+		'plugin' 			=> PATH_ROOT . 'external/plugin/',
+		'module' 			=> PATH_ROOT . 'external/module/',
+		'widget' 			=> PATH_ROOT . 'external/widget/',
+		
+		'template_front' 	=> PATH_ROOT . 'template/',
+		'model_front' 		=> PATH_ROOT . 'application/model/',
+		'model_back' 		=> PATH_ROOT . ADMIN . '/application/model/',
+		'data_front' 		=> PATH_ROOT . 'data/',
+		'data_back' 		=> PATH_ROOT . ADMIN . '/data/',
+	),
+	
+	//COOKIE相关
+	'cookie'	=> array(
+		'auth_key' 			=> 'auth3423',
+		'cookie_path' 	    => '/', //Cookie路径
+		'cookie_prefix' 	=> 'jdphp_',
+	    'cookie_domain'     => '',//byy1.08
+		'session' 			=> PATH_DATA . 'session', //Session路径
+	),
+	
+	//cache
+	'cache'	=> array(
+		//缓存类型
+		'cachetype' => 'filecache', //memcache,memcached,apc,eacc,xcache,wincache,filecache
+		//Memcache 服务器配置
+		'memcache' => array(
+			'servers' => array(
+				array('127.0.0.1', 11211),
+				array('127.0.0.1', 11211),
+			),
+		),
+		//Memcached 服务器配置
+		'memcached' => array(
+			'servers' => array(
+				array('127.0.0.1', 11211),
+				array('127.0.0.1', 11211),
+			),
+            'persistent' => false,
+		),
+		//文件缓存设置
+		'file' => array(
+			'expire' => 3600, //s
+			'path' => PATH_DATA . 'cache/', //缓存目录
+		),
+	),
+	
+	//tpl
+	'tpl' => array(
+		//'template_dir' => PATH_DATA . 'template/',
+		//'compile_dir' => PATH_DATA . 'template_compiled/',
+		//'cache_dir' => PATH_DATA . 'template_cache/',
+		'left_delimiter' => '{{',
+		'right_delimiter' => '}}',
+		'caching' => false,
+		'compile_check' => true,
+	),
+	
+	//其他
+	'installed' 			=> false,
+	'table_prefix' 			=> 'jd_',
+	'error_log'				=> PATH_DATA . 'logs/phperr.log',
+	'verify_code' 			=> true,
+	'enable_rewrite' 		=> false,
+	'enable_html' 			=> false,
+	'debug_level' 			=> 1, //1,0
+	'md5_key' 				=> '#&*$^!% ￣!^@', //md5密匙
+	'language'				=> 'zhCN', //zhCN,enUS,zhTW
+	'charset' 				=> 'utf-8', //utf-8,gbk,big5
+	'page_rows' 			=> 15, // 分页
+	'mysql_cache' 			=> false, //mysql缓存
+	'eval_php_time' 		=> false, //计算页面的php解析时间
+	'version' 				=> '1.08', //当前版本
+	'update_url' 			=> 'http://localhost/jdphp1.08/update_server/', //升级地址
+
+	//yx36
+	'sdkurl' => array(
+		//'prefix'=>"http://www.test.com/", //内网
+		'prefix'=>"http://api.yx36.com/", //外网
+	),
+	
+);
+?>

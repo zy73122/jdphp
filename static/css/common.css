@@ -1,0 +1,56 @@
+@charset "utf-8";
+/* CSS Document */
+
+* { font-family: "宋体", Georgia, "Times New Roman", Times, serif; font-size:12px; }
+body, ul, li, ol, form{ margin:0; padding:0; font-size:12px; }
+ul li { list-style-type:none }
+a { text-decoration:none; } 
+.left { float:left }
+.right { float:right }
+.fl { float:left }
+.fr { float:right }
+.line { width:100%; padding:5px 5px }
+.center { margin:0 auto }
+.clear { clear:both; font-size:0; line-height:0 }
+.hidden { display:none }
+.hide { display:none }
+/*color*/
+.green { color:green }
+.red { color:red }
+.white { color:white }
+.black { color:black }
+.gray { color:gray }
+.blue { color:blue }
+.yellow { color:yellow }
+.orange { color:orange }
+.deep_orange { color:#FF4800 !important }
+.readonly { border:none; background:none; }
+/*other*/
+.b { font-weight:bold !important}
+.hand { cursor:pointer }
+.line5 { font-size: 0px; line-height: 0px; height: 5px; }
+.line10 { font-size: 0px; line-height: 0px; height: 10px; }
+.line20 { font-size: 0px; line-height: 0px; height: 20px; }
+.line30 { font-size: 0px; line-height: 0px; height: 30px; }
+.line40 { font-size: 0px; line-height: 0px; height: 40px; }
+.line50 { font-size: 0px; line-height: 0px; height: 50px; }		   
+/*jquery.ui*/
+div.ui-widget { font: 12px "Trebuchet MS", sans-serif; }
+/*jquery.ui loading-dialog*/
+.myLoadingDialog { }
+.myLoadingDialog .ui-dialog-titlebar { display:none }
+.myLoadingDialog .ui-resizable-handle { display:none }
+.myLoadingDialog .ui-resizable-se { display:none }
+/*widget*/
+ul.widget_list li { padding: 10px 20px; background: #F9F9F9; border:1px dotted #CCC; display:block; float:left; cursor:pointer }
+/*module friendlink*/
+ul.friendlink_txt { display:inline-block }
+ul.friendlink_txt li { float:left; text-align:center; background:none; padding:5px 10px }
+ul.friendlink_img { display:inline-block }
+ul.friendlink_img li { float:left; text-align:center; background:none; padding:2px; }
+/*ajax message*/
+#msg_clew { background:url(../image/waiting.gif) no-repeat #000; color: #444; width:150px; height:32px; padding:20px 5px 5px 15px; position:absolute; left:300px; top:250px; display:none }
+/*module cms*/
+ol.articlelist { list-style:inside decimal; }
+ul.articlelist .txt { }
+.articlelist .cont { background:#FFF }

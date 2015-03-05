@@ -1,0 +1,19 @@
+{{include file=header.html}}
+<div class="content">
+	<div id="special_banner">前台显示</div>
+	<div class="hotel_list">
+		<ul>
+			{{foreach from=$data item=hotel}}
+			<li>
+				<div class="pic">
+					<!--图片列表-->
+					{{foreach from=$hotel.hasImages item=img}} <a target="_blank"
+						href="{{$img.img_url}}"><img width="160" height="160"
+						src="{{$img.img_thumb}}" title="{{$img.img_title}}" /></a>
+				</div> {{/foreach}} <!--图片列表end-->
+				<p>{{$hotel.hotel_name}}</p>
+			</li> {{/foreach}}
+		</ul>
+	</div>
+</div>
+{{include file=footer.html}}

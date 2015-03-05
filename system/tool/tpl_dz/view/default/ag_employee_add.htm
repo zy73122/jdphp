@@ -1,0 +1,349 @@
+<!--{template 'header'}-->
+<div id="page">
+	<!--{template 'top'}-->
+	<div class="clear"></div>
+	<div class="dtMainBody">
+	    <div class="pageTitle wrapper">
+	        <div class="pageFunction">新增职员</div>
+	    </div>
+	    <div class="clear"></div>
+    	<div class="dtSmallBody">
+			<div id="container" class="container">
+				<form action="{BASE_URL}staffajax/staff_add" method="post" name="addStaffForm" id="addStaffForm">
+				<div id="tabs-1" class="bigForm fillForm divContentTable">
+					<input type="hidden" name="dept[]" value="0" />
+					<table>
+						<tr class="trTitleLine">
+		       				<td colspan="3">基本信息</td>
+		       			</tr>
+						<tr class="infoItem">
+					        <td><span class="validateInfo">* </span>姓名：</td>
+					        <td><input type="text" id="username" name="username" /></td>
+					        <td></td>
+				        </tr>
+				        <tr class="infoItem">
+				        	<td>工号：</td>
+				        	<td><input type="text" id="workid" name="workid" /></td>
+				            <td></td>
+				        </tr>
+				        <tr class="infoItem">
+					        <td>性别：</td>
+					        <td>
+					        	<select name="gender">
+									<option value="1">男</option>
+									<option value="2">女</option>
+									<option value="0">保密</option>
+								</select>
+					        </td>
+					        <td></td>
+				        </tr>
+				        <tr class="infoItem add1">
+					        <td>部门：</td>
+					        <td>
+                            	<input type="hidden" name="dept[0][deptid]" value="$dept['id']" class="notRemove" />
+					        	<input type="text"  disabled="disabled" name="dept[0][deptname]" value="$dept['name']" />
+	                                <a title="部门选择" class="imgBtn thickbox" style="vertical-align:middle; margin-bottom:6px; margin-bottom:4px\9; *+margin-bottom: 10px; " href="{BASE_URL}ag/department_window?keepThis=0&TB_iframe=true&height=0&width=0">
+			        					<span>选择</span>
+			        				</a>
+								<a class="addtr" href="###" onclick="cloneRow(this);">添加</a>
+					        </td>
+					        <td></td>
+				        </tr>
+				        <tr class="infoItem">
+				        	<td>职务：</td>
+				        	<td><input type="text" name="duty" /></td>
+				        	<td></td>
+				        </tr>
+				        <tr class="infoItem">
+				        	<td>入司时间：</td>
+				        	<td><input type="text" name="joindate" id="joindate"/></td>
+				        	<td></td>
+				        </tr>
+				        <tr class="infoItem">
+				        	<td>常用邮箱：</td>
+				        	<td>
+				        		<input type="text" name="gemail"/>
+			        		</td>
+			        		<td></td>
+				        </tr>
+				        <tr>
+				        	<td></td>
+				        	<td colspan="2" ><input type="checkbox" name="is_autouap" value="1" class="checkbox" checked="checked" /> 将常用邮箱绑定到91通行证</td>
+				        </tr>
+				        <tr>
+				        	<td></td>
+				        	<td colspan="2" ><input type="checkbox" name="is_send_email" value="1" class="checkbox" checked="checked" /> 邮件通知结果</td>
+				        </tr>
+				        <tr>
+				        	<td></td>
+				        	<td colspan="2" ><input type="checkbox" name="is_send_sms" value="1" class="checkbox" /> 短信通知结果</td>
+				        </tr>
+				        <tr class="showMore">
+				        	<td colspan="3"><a href="###" class="showMoreDown">扩展资料</a></td>
+				        </tr>
+				        <tr class="trTitleLine contactItem">
+		       				<td colspan="3">联系方式</td>
+		       			</tr>
+				        <tr class="contactItem">
+				        	<td>计费电话：</td>
+				        	<td><input type="text" name="meter_telephone" /></td>
+				        	<td></td>
+				        </tr>
+				        <tr class="contactItem">
+				        	<td>常用手机：</td>
+				        	<td><input type="text" name="mobilephone" /></td>
+				        	<td></td>
+				        </tr>
+				        <tr class="contactItem">
+					        <td>传真：</td>
+					        <td><input type="text" name="fax" /></td>
+					        <td></td>
+				        </tr>
+                        <tr class="contactItem add2">
+					        <td>电话：</td>
+					        <td>
+					        	<input type="text" name="ext_telephone[0][telephone]" />
+					        	
+					        		<select name="ext_telephone[0][type]" style="width: 135px;">
+					        			<option value="home">住宅电话</option>
+					        			<option value="work">单位电话</option>
+					        			<option value="cell">移动电话</option>
+					        			<option value="home,fax">家庭传真</option>
+					        			<option value="work,fax">工作传真</option>
+					        			<option value="pager">寻乎机</option>
+					        			<option value="other">其他电话</option>
+									</select>
+					        	
+					        </td>
+					        <td>
+					        	<a class="addtr" href="###" onclick="cloneRow(this);">添加</a>
+					        </td>
+				        </tr>
+				        <tr class="contactItem add3">
+					        <td>附加邮件：</td>
+					        <td>
+					        	<span><input type="text" name="ext_email[0][email]" /></span>
+					        	<span>
+					        		<select name="ext_email[0][type]" style="width: 135px;">
+					        			<option value="internet,home">家庭邮箱</option>
+					        			<option value="internet,work">工作邮箱</option>
+					        			<option value="internet">其他邮箱</option>
+									</select>
+					        	</span>
+					        </td>
+					        <td>
+					        	<a class="addtr" href="###" onclick="cloneRow(this);">添加</a>
+					        </td>
+				        </tr>
+                        
+				        <tr class="contactItem add4">
+					        <td>即时通讯：</td>
+					        <td>
+					        	<span><input type="text" name="communication[0][tool]" /></span>
+					        	<span>
+					        		<select name="communication[0][protocol]">
+					        			<option value="91u">91U</option>
+					        			<option value="qq">QQ</option>
+					        			<option value="msn">MSN</option>
+					        			<option value="gtalk">Gtalk</option>
+					        			<option value="aim">AIM</option>
+					        			<option value="yahoo">YAHOO</option>
+					        			<option value="skype">Skype</option>
+					        			<option value="icq">ICQ</option>
+					        			<option value="jabber">JABBER</option>
+									</select>
+					        	</span>
+					        	<span>
+					        		<select name="communication[0][type]">
+					        			<option value="home">家庭</option>
+					        			<option value="work">工作</option>
+					        			<option value="other">其他</option>
+									</select>
+					        	</span>
+					        </td>
+					        <td>
+					        	<a class="addtr" href="###" onclick="cloneRow(this);">添加</a>
+					        </td>
+				        </tr>
+				        <tr class="contactItem">
+					        <td>常用地址：</td>
+					        <td>
+					        	<span><input type="text" name="g_addr" /></span>
+					        	<span><input type="text" name="g_postcode" style="width: 130px; position:relative; top:-1px\9;" value="邮政编码" /></span>
+					        </td>
+					        <td></td>
+				        </tr>
+                        
+				        <tr class="contactItem add5">
+                        	<td>附加地址：</td>
+					        <td>
+				        		<div class="cityWrap">
+				        			<select class="country" name="ext_addr[0][country]">
+                                    </select>
+                                    <select class="prov" name="ext_addr[0][province]">
+                                        <option value="">请选择</option>
+                                    </select>
+                                    <select class="city" name="ext_addr[0][city]">
+                                        <option value="">请选择</option>
+                                    </select>
+				        		</div>
+				        		<div><input type="text" name="ext_addr[0][area]" value="街路巷" style="width:348px;"/></div>
+					        	<span><input type="text" name="ext_addr[0][postcode]" value="邮编" /></span>
+					        	<span>
+					        		<select name="ext_addr[0][type]"  style="width: 135px; top:1px\9; position:relative;">
+					        			<option value="home">家庭</option>
+					        			<option value="work">工作</option>
+					        			<option value="other">其他</option>
+									</select>
+					        	</span>
+					        </td>
+					        <td>
+					        	<a class="addtr" href="###" onclick="cloneRow(this);">添加</a>
+					        </td>
+				        </tr>
+				        <tr class="trTitleLine selfItem">
+		       				<td colspan="3">个性资料</td>
+		       			</tr>
+				        <tr class="selfItem">
+					        <td>生日：</td>
+					        <td><input type="text" name="birthday" id="datepicker" /></td>
+					        <td></td>
+				        </tr>
+				        <tr class="selfItem">
+					        <td>血型：</td>
+					        <td>
+					        	<select name="blood">
+					        		<option value=""> --- </option>
+									<option value="A">A</option>
+									<option value="B">B</option>
+									<option value="AB">AB</option>
+									<option value="O">O</option>
+								</select>
+					        </td>
+					        
+				        </tr>
+				        <tr class="selfItem">
+					        <td>个性签名：</td>
+					        <td><input type="text" name="signature"/></td>
+					        <td></td>
+				        </tr>
+				        <tr class="selfItem">
+					        <td>个人主页：</td>
+					        <td><input type="text" name="site" /></td>
+					        <td></td>
+				        </tr>
+				        <tr class="selfItem">
+					        <td>个人说明：</td>
+					        <td>
+					        	<textarea name="description" rows="4" cols="42" style="height:70px; width:348px;"></textarea>
+					        </td>
+					        <td></td>
+				        </tr>
+					</table>
+				</div>
+                <br /><br /><br /><br />
+				<div id="output1"></div>
+				<div class="clear"></div>	
+				<!--<div class="dtActionLine" style="margin:10px 0 10px 186px;background:white">-->
+                <div class="dtActionLine" style="width:500px; height:30px; padding:5px; padding-left:100px; background:white">
+					<div class="normalBtns"><input type="button" value="保存" name="mySubmit" /></div>
+					<a class="imgBtn" style="vertical-align:bottom;"  href="{BASE_URL}ag/employee" ><span>取消</span></a>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="{JS_URL}cityjson.js"></script>
+<script type="text/javascript" src="{JS_URL}jquery.ui.datepicker-zh-CN.js"></script>
+<script type="text/javascript" src="{JS_URL}admin.js"></script>
+<script type="text/javascript" src="{JS_URL}script.js"></script>
+<script type="text/javascript" src="{JS_URL}jquery.cityselect.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#datepicker").datepicker({
+		changeMonth: false,
+		changeYear: true
+	});
+	$("input[name=joindate]").datepicker({
+		changeMonth: false,
+		changeYear: true
+	});
+	
+	$('#ui-datepicker-div').click(function() {
+		setTimeout(function() {
+			$("#forcrtime").remove();
+		}, 100);
+	});
+	$('select.country').addCountry().bind('change', function() {
+		var _this = $(this);
+		
+		if (_this.val() == '中国') {
+			_this.next().show().next().show();
+		}
+		else {
+			_this.next().find('option').attr('selected', '').eq(0).attr('selected', 'selected').end().end().hide().next()
+			.html('<option value="">请选择</option>').hide();
+		}
+	});
+	
+	$(".cityWrap").citySelect();
+	
+	// 入司时间
+	$('input[name=joindate]').val(getCurrentDate());
+	
+	// 保存将要复制的数据
+	$('.add1, .add2, .add3, .add4, .add5').each(function(index) {
+		var _this = $(this);
+
+		_this.attr('save', '<tr class="infoItem">' + _this.html() + '</tr>');
+	});
+	
+	$('input[name=mySubmit]').click(function() {
+		if (_unitstaff.check()) {
+			$.ajax({
+				url: URL + 'staffajax/staff_add',
+				data: $('#addStaffForm').serialize(),
+				type: 'post',
+				dataType: 'json',
+				beforeSend: function() {
+					loading();
+				},
+				success: function(data) {
+					tip('success', data[0].msg, function() {
+						location.href = URL + 'ag/employee';
+					});
+				},
+				error: function(XMLHttpRequest, textStatus, errorThrown) {
+					var data = eval(XMLHttpRequest.responseText);
+					
+					if(XMLHttpRequest.status==409||XMLHttpRequest.status==405) {
+						tip('fail', data[0].msg)
+					}
+				}
+			});
+		}
+	});
+	
+	$('.dtActionLine').fixed({
+		left  : '15%',
+		bottom: -10
+	});
+});
+function showResponse(responseText, statusText, xhr)  { 
+    // for normal html responses, the first argument to the success callback 
+    // is the XMLHttpRequest object's responseText property 
+ 
+    // if the ajaxSubmit method was passed an Options Object with the dataType 
+    // property set to 'xml' then the first argument to the success callback 
+    // is the XMLHttpRequest object's responseXML property 
+ 
+    // if the ajaxSubmit method was passed an Options Object with the dataType 
+    // property set to 'json' then the first argument to the success callback 
+    // is the json data object returned by the server 
+ 
+    alert('status: ' + statusText + '\n\nresponseText: \n' + responseText + 
+        '\n\nThe output div should have already been updated with the responseText.'); 
+}
+</script>
+<!--{template 'footer_inner'}-->
