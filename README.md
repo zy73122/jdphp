@@ -20,10 +20,6 @@ mkdir 700 app/data/template_compiled
  * 创建数据库  
 ```shell
 > create database jdphp109 charset=utf8  
-```
-
- * 导入数据  
-```shell
 mysql -uxx -pxx jdphp109 < jdphp108.sql  
 ```
 
