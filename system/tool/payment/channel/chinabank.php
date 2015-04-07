@@ -43,13 +43,15 @@ class chinabank extends base_payment
 	 */
 	function get_code($order, $payment)
 	{
-		$data_vid		   = trim($payment['pay_config']['chinabank_account']);
-		$data_orderid	   = $order['order_sn'];
-		$data_vamount	   = $order['order_amount'];
-		$data_vmoneytype	= 'CNY';
-		$data_vpaykey	   = trim($payment['pay_config']['chinabank_key']);
-		$data_vreturnurl	= tool::current_url();
-		$remark1			= "";					  //商户需要在支付结果通知中转发的商户参数二
+		$data_vid          = trim($payment['pay_config']['chinabank_account']);
+		$data_orderid      = $order['order_sn'];
+		$data_vamount      = $order['order_amount'];
+		$data_vmoneytype   = 'CNY';
+		$data_vpaykey      = trim($payment['pay_config']['chinabank_key']);
+		$data_vreturnurl   = tool::current_url();
+		$remark1           = "";                     //值自定义。
+		//$remark2 = '[url:=http://domain/chinabank/AutoReceive.php]'; //服务器异步通知的接收地址。对应AutoReceive.php示例。必须要有[url:=]格式。
+		                                             //参照"网银在线支付B2C系统商户接口文档v4.1.doc"中2.3.3.2。
 
 
 		$MD5KEY =$data_vamount.$data_vmoneytype.$data_orderid.$data_vid.$data_vreturnurl.$data_vpaykey;
