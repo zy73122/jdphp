@@ -57,7 +57,7 @@ class chinabank extends base_payment
 		$MD5KEY =$data_vamount.$data_vmoneytype.$data_orderid.$data_vid.$data_vreturnurl.$data_vpaykey;
 		$MD5KEY = strtoupper(md5($MD5KEY));
 
-		$pay_htmlcode  = '<br /><form style="text-align:center;" method=post action="https://pay3.chinabank.com.cn/PayGate" target="_blank">';
+		$pay_htmlcode  = '<br /><form style="text-align:center;" method=post action="https://pay3.chinabank.com.cn/PayGate?encoding=UTF-8" target="_blank">';
 		$pay_htmlcode .= "<input type=HIDDEN name='v_mid' value='".$data_vid."'>";
 		$pay_htmlcode .= "<input type=HIDDEN name='v_oid' value='".$data_orderid."'>";
 		$pay_htmlcode .= "<input type=HIDDEN name='v_amount' value='".$data_vamount."'>";
